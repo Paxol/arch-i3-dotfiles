@@ -3,6 +3,8 @@
 # Config created by Keyitdev https://www.github.com/keyitdev/dotfiles
 # Copyright (C) 2022 Keyitdev
 
+# Adapted by Paxol https://www.github.com/Paxol/dotfiles
+
 config_directory="$HOME/.config"
 fonts_directory="/usr/share/fonts"
 scripts_directory="/usr/local/bin"
@@ -32,7 +34,7 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed acpi alsa-utils base-devel curl git pulseaudio pulseaudio-alsa xorg xorg-xinit alacritty btop code dunst feh firefox i3-gaps libnotify light mpc mpd ncmpcpp nemo neofetch neovim pacman-contrib papirus-icon-theme picom polybar ranger rofi scrot slop xclip zathura zathura-pdf-mupdf zsh
+    sudo pacman -S --noconfirm --needed acpi alsa-utils base-devel curl git pulseaudio pulseaudio-alsa xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light nemo neofetch papirus-icon-theme picom polybar rofi xclip zsh
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with $aurhelper.${no_color}"
@@ -52,19 +54,12 @@ create_backup(){
     [ -d "$config_directory"/dunst ] && mv "$config_directory"/dunst "$config_directory"/dunst_$date && echo "dunst configs detected, backing up."
     [ -d "$config_directory"/gtk-3.0 ] && mv "$config_directory"/gtk-3.0 "$config_directory"/gtk-3.0_$date && echo "gtk-3.0 configs detected, backing up."
     [ -d "$config_directory"/i3 ] && mv "$config_directory"/i3 "$config_directory"/i3_$date && echo "i3 configs detected, backing up."
-    [ -d "$config_directory"/mpd ] && mv "$config_directory"/mpd "$config_directory"/mpd_$date && echo "mpd configs detected, backing up."
-    [ -d "$config_directory"/ncmpcpp ] && mv "$config_directory"/ncmpcpp "$config_directory"/ncmpcpp_$date && echo "ncmpcpp configs detected, backing up."
     [ -d "$config_directory"/neofetch ] && mv "$config_directory"/neofetch "$config_directory"/neofetch_$date && echo "neofetch configs detected, backing up."
-    [ -d "$config_directory"/nvim ] && mv "$config_directory"/nvim "$config_directory"/nvim_$date && echo "nvim configs detected, backing up."
     [ -d "$config_directory"/picom ] && mv "$config_directory"/picom "$config_directory"/picom_$date && echo "picom configs detected, backing up."
     [ -d "$config_directory"/polybar ] && mv "$config_directory"/polybar "$config_directory"/polybar_$date && echo "polybar configs detected, backing up."
-    [ -d "$config_directory"/ranger ] && mv "$config_directory"/ranger "$config_directory"/ranger_$date && echo "ranger configs detected, backing up."
     [ -d "$config_directory"/rofi ] && mv "$config_directory"/rofi "$config_directory"/rofi_$date && echo "rofi configs detected, backing up."
-    [ -d "$config_directory"/zathura ] && mv "$config_directory"/zathura "$config_directory"/zathura_$date && echo "zathura configs detected, backing up."
-
+    
     [ -d "$scripts_directory" ] && sudo mv "$scripts_directory" "$scripts_directory"_$date && echo "scripts ($scripts_directory) detected, backing up."
-
-    [ -f "$config_directory"/Code\ -\ OSS/User/settings.json ] && mv "$config_directory"/Code\ -\ OSS/User/settings.json "$config_directory"/Code\ -\ OSS/User/settings.json_$date && echo "Vsc configs detected, backing up."
 
     [ -f /etc/fonts/local.conf ] && sudo mv /etc/fonts/local.conf /etc/fonts/local.conf_$date && echo "Fonts configs detected, backing up."
 }
@@ -86,9 +81,6 @@ copy_other_configs(){
     sudo cp -r ./tokyonight_gtk /usr/share/themes
     echo -e "${green}[*] Copying wallpapers to "$HOME"/Pictures/wallpapers.${no_color}"
     cp -r ./wallpapers/* "$HOME"/Pictures/wallpapers
-    echo -e "${green}[*] Copying vsc configs.${no_color}"
-    cp -r ./vsc/* "$HOME"/.vscode-oss/extensions
-    cp ./vsc/settings.json "$HOME"/.config/Code\ -\ OSS/User
     echo -e "${green}[*] Copying zsh configs.${no_color}"
     sudo cp ./keyitdev.zsh-theme /usr/share/oh-my-zsh/custom/themes
     cp ./.zshrc "$HOME"
@@ -118,8 +110,6 @@ finishing(){
     echo -e "${green}[*] Setting Zsh as default shell.${no_color}"
     chsh -s /bin/zsh
     sudo chsh -s /bin/zsh
-    echo -e "${green}[*] Updating nvim extensions.${no_color}"
-    nvim +PackerSync
 }
 
 cmd=(dialog --clear --title "Aur helper" --menu "Firstly, select the aur helper you want to install (or have already installed)." 10 50 16)
@@ -141,11 +131,11 @@ options=(1 "System update" on
          7 "Copy configs" on
          8 "Copy scripts" on
          9 "Copy fonts" on
-         10 "Copy other configs (gtk theme, wallpaper, vsc configs, zsh configs)" on
+         10 "Copy other configs (gtk theme, wallpaper, zsh configs)" on
          11 "Install additional packages" off
          12 "Install emoji fonts" off
          13 "Install sddm with flower theme" off
-         14 "Make Light executable, set zsh as default shell, update nvim extensions." on)
+         14 "Make Light executable, set zsh as default shell" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 clear
