@@ -8,15 +8,12 @@ exec_always ~/.screenlayout/monitor.sh
 set $mod Mod4
 
 # set font
-font pango:Open sans 11
+font pango: Noto Sans Regular 11
 
 ### Runnig apps in background ###
 
 # run picom
 exec_always --no-startup-id picom &
-
-# run mpd
-exec_always --no-startup-id mpd &
 
 # run dunst
 exec_always --no-startup-id dunst &
@@ -95,10 +92,6 @@ bindsym $mod+space focus mode_toggle
 
 # run lockscreen
 bindsym $mod+l exec lock
-
-# monitor settings
-bindsym $mod+n exec xrandr --auto --output eDP-1 --mode 1920x1080 --right-of HDMI-1 && i3-msg restart &
-bindsym $mod+m exec xrandr --auto --output HDMI-1 --off && i3-msg restart &
 
 # toggle polybar
 bindsym $mod+o exec $HOME/.config/polybar/launch.sh
@@ -295,3 +288,10 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+# take screenshot on win+shift+s
+bindsym $mod+shift+s exec spectacle
+
+## App shortcuts
+bindsym $mod+w exec microsoft-edge-beta &>/dev/null
+bindsym $mod+e exec nemo
