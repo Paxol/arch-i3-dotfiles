@@ -2,6 +2,8 @@
 # Config created by Keyitdev https://www.github.com/keyitdev/dotfiles
 # Copyright (C) 2022 Keyitdev
 
+exec_always ~/.screenlayout/monitor.sh
+
 # set mod
 set $mod Mod4
 
@@ -41,13 +43,13 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# bindsym $mod+j focus left
+# bindsym $mod+k focus down
+# bindsym $mod+l focus up
+# bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -77,9 +79,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+q layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+q layout stacking
+# bindsym $mod+w layout tabbed
+# bindsym $mod+e layout toggle split
 
 # save and restore layout with i3-resurrect
 bindsym $mod+t  exec --no-startup-id i3-resurrect restore
@@ -92,7 +94,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # run lockscreen
-bindsym $mod+i exec lock
+bindsym $mod+l exec lock
 
 # monitor settings
 bindsym $mod+n exec xrandr --auto --output eDP-1 --mode 1920x1080 --right-of HDMI-1 && i3-msg restart &
@@ -114,14 +116,15 @@ bindsym $mod+b move workspace to output right
 # run rofi programs
 bindsym $mod+a exec "rofi -show window -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+d exec "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
-bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
+# bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
 bindsym $mod+z exec "rofi -show  -modi ':rofi-bookmarks' -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+x exec "rofi-powermenu"
 bindsym $mod+c exec "rofi-screenshot"
 
 # take a screenshot
-bindsym Pause exec screenshot -sa
-bindsym Print exec screenshot -sf
+# TODO: change
+# bindsym Pause exec screenshot -sa
+# bindsym Print exec screenshot -sf
 
 # brightness control
 exec_always --no-startup-id light -I
@@ -142,17 +145,17 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86ScreenSaver exec xset dpms force off
 
 # :)
-bindsym ctrl + F1 exec --no-startup-id alacritty
-bindsym ctrl + F5 exec --no-startup-id kitty
-bindsym ctrl + F2 exec --no-startup-id dmenu_run
+# bindsym ctrl + F1 exec --no-startup-id alacritty
+# bindsym ctrl + F5 exec --no-startup-id kitty
+# bindsym ctrl + F2 exec --no-startup-id dmenu_run
 
 # toggle microphone 
-bindsym ctrl + F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
-bindsym ctrl + F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
+# bindsym ctrl + F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
+# bindsym ctrl + F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
 
 # toggle touchpad
-bindsym ctrl + F9 exec xinput set-prop 15 "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
-bindsym ctrl + F10 exec xinput set-prop 15 "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
+# bindsym ctrl + F9 exec xinput set-prop 15 "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
+# bindsym ctrl + F10 exec xinput set-prop 15 "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
 
 # workspaces names
 set $ws1 "1"
@@ -229,7 +232,7 @@ bindsym $mod+r mode "resize"
 ### BODERS ###
 
 #border width
-default_border pixel 2
+default_border pixel 4
 
 #border colors
 client.focused #343746 #343746 #F8F8F2 #343746 #343746
