@@ -3,7 +3,7 @@
 # Config created by Keyitdev https://www.github.com/keyitdev/dotfiles
 # Copyright (C) 2022 Keyitdev
 
-# Adapted by Paxol https://www.github.com/Paxol/dotfiles
+# Adapted by Paxol https://www.github.com/Paxol/arch-i3-dotfiles
 
 config_directory="$HOME/.config"
 fonts_directory="/usr/share/fonts"
@@ -34,7 +34,7 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed acpi alsa-utils base-devel curl git pulseaudio pulseaudio-alsa xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light nemo neofetch papirus-icon-theme picom polybar rofi xclip zsh
+    sudo pacman -S --noconfirm --needed acpi alsa-utils arandr base-devel curl git pulseaudio pulseaudio-alsa xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light nemo neofetch papirus-icon-theme picom polybar rofi xclip zsh
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with $aurhelper.${no_color}"
@@ -87,7 +87,7 @@ copy_other_configs(){
 }
 install_additional_pkgs(){
     echo -e "${green}[*] Installing additional packages with $aurhelper.${no_color}"
-    "$aurhelper" -S --noconfirm --needed dhcpcd gimp iwd libreoffice ntfs-3g ntp pulsemixer vnstat
+    "$aurhelper" -S --noconfirm --needed dhcpcd iwd pulsemixer
 }
 install_emoji_fonts(){
     echo -e "${green}[*] Installing emoji fonts with $aurhelper.${no_color}"

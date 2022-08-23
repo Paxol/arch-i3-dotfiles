@@ -13,5 +13,7 @@ source "$ZSH"/oh-my-zsh.sh
 # other
 alias ll="ls -l"
 alias la="ls -la"
+alias mixer="pulsemixer"
+
 # cd
 alias ..="cd .."
