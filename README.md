@@ -92,7 +92,7 @@ Detailed information and dependencies
 Clone the repository.
 ```sh
 git clone -b v3 --depth 1 https://www.github.com/Paxol/arch-i3-dotfiles.git
-cd dotfiles
+cd arch-i3-dotfiles
 chmod +x install-on-arch.sh
 ./install-on-arch.sh
 ```
