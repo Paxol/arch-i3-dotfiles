@@ -91,7 +91,7 @@ Detailed information and dependencies
 
 Clone the repository.
 ```sh
-git clone -b v3 --depth 1 https://www.github.com/Paxol/dotfiles.git
+git clone -b v3 --depth 1 https://www.github.com/Paxol/arch-i3-dotfiles.git
 cd dotfiles
 chmod +x install-on-arch.sh
 ./install-on-arch.sh
@@ -101,7 +101,7 @@ chmod +x install-on-arch.sh
 
 1. Clone this repository.
     ```sh
-    git clone -b v3 --depth 1 https://www.github.com/Paxol/dotfiles.git
+    git clone -b v3 --depth 1 https://www.github.com/Paxol/arch-i3-dotfiles.git
     ```
 
 2. Install an AUR helper (for example, `yay` in `"$HOME"/.srcs`).
