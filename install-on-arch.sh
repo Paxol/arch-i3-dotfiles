@@ -34,7 +34,7 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed acpi alsa-utils arandr base-devel curl git xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light papirus-icon-theme picom polybar rofi xclip zsh
+    sudo pacman -S --noconfirm --needed acpi alsa-utils arandr base-devel curl git xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify papirus-icon-theme picom polybar rofi xclip zsh
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with $aurhelper.${no_color}"

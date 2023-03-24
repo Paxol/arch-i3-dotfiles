@@ -116,7 +116,7 @@ bindsym $mod+x exec "rofi-powermenu"
 # bindsym Print exec screenshot -sf
 bindsym $mod+Shift+s exec "spectacle"
 
-# brightness control
+# brightness control - pacman -S light
 # exec_always --no-startup-id light -I
 # bindsym XF86MonBrightnessUp exec light -A 2 && light -O && brightness &
 # bindsym XF86MonBrightnessDown exec light -U 2 && light -O && brightness &
