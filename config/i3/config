@@ -2,13 +2,11 @@
 # Config created by Keyitdev https://www.github.com/keyitdev/dotfiles
 # Copyright (C) 2022 Keyitdev
 
-exec_always ~/.screenlayout/monitor.sh
-
 # set mod
 set $mod Mod4
 
 # set font
-font pango: Noto Sans Regular 11
+font pango:Open sans 11
 
 ### Runnig apps in background ###
 
@@ -19,7 +17,7 @@ exec_always --no-startup-id picom &
 exec_always --no-startup-id dunst &
 
 # set wallpaper with fed
-exec_always feh --no-fehbg --bg-scale $HOME/Pictures/wallpapers/background.png
+exec_always feh --no-fehbg --bg-fill $HOME/Pictures/background.jpg
 
 # launch polybar
 exec_always --no-startup-id killall -q
@@ -29,7 +27,6 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id battery&
 
 # start i3 components
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 ### Shortcuts ###
@@ -43,10 +40,10 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+q kill
 
 # change focus
-# bindsym $mod+j focus left
-# bindsym $mod+k focus down
-# bindsym $mod+l focus up
-# bindsym $mod+semicolon focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -68,9 +65,7 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+h split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -80,18 +75,18 @@ bindsym $mod+f fullscreen toggle
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
 
-# save and restore layout with i3-resurrect
-bindsym $mod+t  exec --no-startup-id i3-resurrect restore
-bindsym $mod+y  exec --no-startup-id i3-resurrect save
-
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # run lockscreen
-bindsym $mod+l exec lock
+# bindsym $mod+i exec lock
+
+# monitor settings
+# bindsym $mod+n exec xrandr --auto --output eDP-1 --mode 1920x1080 --right-of HDMI-1 && i3-msg restart &
+# bindsym $mod+m exec xrandr --auto --output HDMI-1 --off && i3-msg restart &
 
 # toggle polybar
 bindsym $mod+o exec $HOME/.config/polybar/launch.sh
@@ -107,22 +102,24 @@ bindsym $mod+b move workspace to output right
 #bindsym $mod+d focus child
 
 # run rofi programs
+bindsym $mod+d exec "krunner"
+
 bindsym $mod+a exec "rofi -show window -no-default-config -config ~/.config/rofi/main.rasi"
-bindsym $mod+d exec "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
-# bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
+# bindsym $mod+d exec "rofi -show drun -no-default-config -config ~/.config/rofi/main.rasi"
+bindsym $mod+s exec "rofi -show drun -no-default-config -config ~/.config/rofi/full_screen.rasi"
 bindsym $mod+z exec "rofi -show  -modi ':rofi-bookmarks' -no-default-config -config ~/.config/rofi/main.rasi"
 bindsym $mod+x exec "rofi-powermenu"
-bindsym $mod+c exec "rofi-screenshot"
+# bindsym $mod+c exec "rofi-screenshot"
 
 # take a screenshot
-# TODO: change
 # bindsym Pause exec screenshot -sa
 # bindsym Print exec screenshot -sf
+bindsym $mod+Shift+s exec "spectacle"
 
 # brightness control
-exec_always --no-startup-id light -I
-bindsym XF86MonBrightnessUp exec light -A 2 && light -O && brightness &
-bindsym XF86MonBrightnessDown exec light -U 2 && light -O && brightness &
+# exec_always --no-startup-id light -I
+# bindsym XF86MonBrightnessUp exec light -A 2 && light -O && brightness &
+# bindsym XF86MonBrightnessDown exec light -U 2 && light -O && brightness &
 
 # brightness control hdmi
 bindsym Ctrl+F7 exec brightness_hdmi down
@@ -138,17 +135,17 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86ScreenSaver exec xset dpms force off
 
 # :)
-# bindsym ctrl + F1 exec --no-startup-id alacritty
-# bindsym ctrl + F5 exec --no-startup-id kitty
-# bindsym ctrl + F2 exec --no-startup-id dmenu_run
+bindsym ctrl + F1 exec --no-startup-id alacritty
+bindsym ctrl + F5 exec --no-startup-id kitty
+bindsym ctrl + F2 exec --no-startup-id dmenu_run
 
-# toggle microphone 
-# bindsym ctrl + F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
-# bindsym ctrl + F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
+# toggle microphone
+bindsym ctrl + F3 exec amixer set Capture nocap && dunstify -a "Microphone" "Microphone" "Microphone is muted" -r 100 -i /usr/local/bin/icons/mic-off.svg
+bindsym ctrl + F4 exec amixer set Capture cap && dunstify -a "Microphone" "Microphone" "Microphone is unmuted" -r 100 -i /usr/local/bin/icons/mic.svg
 
 # toggle touchpad
-# bindsym ctrl + F9 exec xinput set-prop 15 "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
-# bindsym ctrl + F10 exec xinput set-prop 15 "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
+bindsym ctrl + F9 exec xinput set-prop 15 "Device Enabled" 0 && dunstify -a "Touchpad" "Touchpad" "Touchpad is disabled" -r 100
+bindsym ctrl + F10 exec xinput set-prop 15 "Device Enabled" 1 && dunstify -a "Touchpad" "Touchpad" "Touchpad is enabled" -r 100
 
 # workspaces names
 set $ws1 "1"
@@ -187,13 +184,15 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# using plasma's logout screen instead of i3's
+bindsym $mod+Shift+e exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -203,16 +202,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px
+        bindsym Down resize grow height 10 px
+        bindsym Up resize shrink height 10 px
+        bindsym Right resize grow width 10 px
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -225,7 +224,7 @@ bindsym $mod+r mode "resize"
 ### BODERS ###
 
 #border width
-default_border pixel 4
+default_border pixel 2
 
 #border colors
 client.focused #343746 #343746 #F8F8F2 #343746 #343746
@@ -289,9 +288,37 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# take screenshot on win+shift+s
-bindsym $mod+shift+s exec spectacle
+# Plasma compatibility improvements
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="yakuake"] floating enable
+for_window [class="systemsettings"] fullscreen enable
+for_window [class="plasmashell"] floating enable
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+#for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] border none; move postiion 1450px 20px
+#for_window [class="plasmashell" window_type="notification"] border none; move right 700px; move down 450px
+no_focus [class="plasmashell" window_type="notification"]
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [title="Save File — KDialog"] floating disable
+for_window [class="kinfocenter"] floating enable
+for_window [instance="_scratchpad"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [class="plasmashell" window_type="applet"] move up 30 px
 
-## App shortcuts
-bindsym $mod+w exec microsoft-edge-beta &>/dev/null
-bindsym $mod+e exec nemo
+# Kill KDE desktop windows opened from version 5.27.2
+for_window [title="Desktop @ QRect"] kill; floating enable; border none
+# end plasma
+
+for_window [class="microsoft-edge-stable"] floating disable
+for_window [title="code-server"] floating disable

@@ -34,11 +34,11 @@ install_aur_helper(){
 }
 install_pkgs(){
     echo -e "${green}[*] Installing packages with pacman.${no_color}"
-    sudo pacman -S --noconfirm --needed acpi alsa-utils arandr base-devel curl git xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light nemo neofetch papirus-icon-theme picom polybar rofi xclip zsh
+    sudo pacman -S --noconfirm --needed acpi alsa-utils arandr base-devel curl git xorg xorg-xinit alacritty btop dunst feh i3-gaps libnotify light papirus-icon-theme picom polybar rofi xclip zsh
 }
 install_aur_pkgs(){
     echo -e "${green}[*] Installing packages with $aurhelper.${no_color}"
-    "$aurhelper" -S --noconfirm --needed i3lock-color i3-resurrect ffcast oh-my-zsh-git
+    "$aurhelper" -S --noconfirm --needed i3lock-color ffcast oh-my-zsh-git
 }
 create_default_directories(){
     echo -e "${green}[*] Copying configs to $config_directory.${no_color}"
@@ -54,7 +54,6 @@ create_backup(){
     [ -d "$config_directory"/dunst ] && mv "$config_directory"/dunst "$config_directory"/dunst_$date && echo "dunst configs detected, backing up."
     [ -d "$config_directory"/gtk-3.0 ] && mv "$config_directory"/gtk-3.0 "$config_directory"/gtk-3.0_$date && echo "gtk-3.0 configs detected, backing up."
     [ -d "$config_directory"/i3 ] && mv "$config_directory"/i3 "$config_directory"/i3_$date && echo "i3 configs detected, backing up."
-    [ -d "$config_directory"/neofetch ] && mv "$config_directory"/neofetch "$config_directory"/neofetch_$date && echo "neofetch configs detected, backing up."
     [ -d "$config_directory"/picom ] && mv "$config_directory"/picom "$config_directory"/picom_$date && echo "picom configs detected, backing up."
     [ -d "$config_directory"/polybar ] && mv "$config_directory"/polybar "$config_directory"/polybar_$date && echo "polybar configs detected, backing up."
     [ -d "$config_directory"/rofi ] && mv "$config_directory"/rofi "$config_directory"/rofi_$date && echo "rofi configs detected, backing up."
@@ -105,8 +104,6 @@ install_sddm(){
     Current=sddm-flower-theme" | sudo tee /etc/sddm.conf
 }
 finishing(){
-    echo -e "${green}[*] Chmoding light.${no_color}"
-    sudo chmod +s /usr/bin/light
     echo -e "${green}[*] Setting Zsh as default shell.${no_color}"
     chsh -s /bin/zsh
     sudo chsh -s /bin/zsh
@@ -135,7 +132,7 @@ options=(1 "System update" on
          11 "Install additional packages" off
          12 "Install emoji fonts" off
          13 "Install sddm with flower theme" off
-         14 "Make Light executable, set zsh as default shell" on)
+         14 "Set zsh as default shell" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
 clear
