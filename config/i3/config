@@ -11,7 +11,7 @@ font pango:Open sans 11
 ### Runnig apps in background ###
 
 # run picom
-# exec_always --no-startup-id picom &
+exec_always --no-startup-id picom &
 
 # run dunst
 exec_always --no-startup-id dunst &
