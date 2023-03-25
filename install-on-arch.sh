@@ -86,7 +86,7 @@ copy_other_configs(){
 }
 install_additional_pkgs(){
     echo -e "${green}[*] Installing additional packages with $aurhelper.${no_color}"
-    "$aurhelper" -S --noconfirm --needed dhcpcd iwd pulsemixer
+    "$aurhelper" -S --noconfirm --needed dhcpcd iwd pulsemixer brave-bin visual-studio-code-bin
 }
 install_emoji_fonts(){
     echo -e "${green}[*] Installing emoji fonts with $aurhelper.${no_color}"
