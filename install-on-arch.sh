@@ -107,6 +107,25 @@ finishing(){
     echo -e "${green}[*] Setting Zsh as default shell.${no_color}"
     chsh -s /bin/zsh
     sudo chsh -s /bin/zsh
+
+    echo "You need to create a new systemd user service to run i3 instead of KWin upon login, run"
+    echo
+    echo "mkdir -p $HOME/.config/systemd/user"
+    echo 'echo "[Unit]
+Description=Launch Plasma with i3
+Before=plasma-workspace.target
+
+[Service]
+ExecStart=/usr/bin/i3
+Restart=on-failure
+
+[Install]
+WantedBy=plasma-workspace.target" > $HOME/.config/systemd/user/plasma-i3.service'
+    echo "systemctl mask plasma-kwin_x11.service --user"
+    echo "systemctl enable plasma-i3 --user"
+
+    echo
+    echo "To come back to KWin unmask 'plasma-kwin_x11.service' and disable 'plasma-i3.service'"
 }
 
 cmd=(dialog --clear --title "Aur helper" --menu "Firstly, select the aur helper you want to install (or have already installed)." 10 50 16)
